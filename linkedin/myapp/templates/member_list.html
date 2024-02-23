@@ -1,0 +1,18 @@
+<!-- member_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'logout' %}">Logout</a> 
+  <h2>Hello, {{ full_name }}</h2>
+  <h1>LinkedIn Members</h1>
+  <ul>
+    {% for user_profile in users %}
+      {% if user_profile.user != request.user %}
+        <li>
+          {{ user_profile.full_name }}
+          <a href="{% url 'view_profile' user_profile.user.username %}">View Full Profile</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}
